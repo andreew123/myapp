@@ -1,0 +1,10 @@
+{
+  "name": "myApp",
+  "url": "localhost:3306/myapp",
+  "version": "0.0.1",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7"
+  }
+}

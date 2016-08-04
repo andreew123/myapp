@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>My App</title>
+
+    <!-- Bootstrap -->
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./node_modules/angular/angular.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-controller="appController as app">
+    <h1>Termékkatalógus</h1>
+    <div>
+	    <table class="table table-bordered">
+	    	<thead>
+          <tr class="success">
+            <th>ID</th>
+  	    		<th>Név</th>
+  	    		<th>Kategória</th>
+  	    		<th>Leírás</th>
+  	    		<th>Ár</th>
+            <th>Állapot</th>
+  	    		<th></th>
+          </tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr class="active">
+            <td>#</td>
+            <td>
+              <input class="form-input" type="text" ng-model="app.newProduct.name">
+            </td>
+            <td>
+              <select class="form-input" ng-model="app.newProduct.category">
+                <option value="{{ category.id }}"
+                data-ng-repeat="category in app.categories">
+                  {{ category.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <textarea class="form-input" type="text" ng-model="app.newProduct.description"></textarea>
+            </td>
+            <td>
+              <input class="form-input" type="number" ng-model="app.newProduct.price">
+            </td>
+            <td>
+              <select class="form-input" ng-model="app.newProduct.conditions">
+                <option value="{{ condition.id }}" data-ng-repeat="condition in app.conditions">
+                  {{ condition.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary" data-ng-click="app.sendForm(app.newProduct)">
+                Mentés
+              </button>
+            </td>
+          </tr>
+          <tr class="active" data-ng-repeat="product in app.products">
+            <td>
+              {{ product.id }}
+            </td>
+            <td>
+              <input class="form-input" type="text"
+              data-ng-model="product.name">
+            </td>
+            <td>
+              <select class="form-input" data-ng-model="product.category">
+                <option data-ng-repeat="category in app.categories track by $index"
+                data-ng-selected="category.id == product.category">
+                  {{ category.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <textarea class="form-input" type="text"
+              data-ng-model="product.description"></textarea>
+            </td>
+            <td>
+              <input class="form-input" type="text"
+              data-ng-model="product.price">
+            </td>
+            <td>
+              <select class="form-input" ng-model="app.editProduct.conditions">
+                <option data-ng-repeat="condition in app.conditions track by $index"
+                data-ng-selected="condition.id == product.condition_id">
+                  {{ condition.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <div>
+                <button type="button" class="btn btn-danger"
+                data-ng-click="app.deleteRow(product)">
+                  Törlés
+                </button>
+                <button type="button" class="btn btn-warning"
+                data-ng-click="app.updateRow(product)">
+                  Szerkesztés
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr class="warning">
+            <td>#</td>
+            <td>
+              <input class="form-input" type="text" ng-model="app.searchProduct.name">
+            </td>
+            <td>
+              <select class="form-input" ng-model="app.searchProduct.category">
+                <option value="{{ category.id }}"
+                data-ng-repeat="category in app.categories">
+                  {{ category.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <input class="form-input" type="text" ng-model="app.searchProduct.description">
+            </td>
+            <td>
+              <input class="form-input" type="number" ng-model="app.searchProduct.price">
+            </td>
+            <td>
+              <select class="form-input" ng-model="app.searchProduct.conditions">
+                <option value="{{ condition.id }}" data-ng-repeat="condition in app.conditions">
+                  {{ condition.name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary"
+              data-ng-click="app.searchForm(app.searchProduct)">
+                Keresés
+              </button>
+            </td>
+          </tr>
+	    	</tbody>
+		  </table>
+    </div>
+    <div class="row">
+      <div class="col-md-9 col-xs-8"></div>
+      <div class="col-md-3 col-xs-4">
+        <button class="btn btn-primary"
+        data-ng-click="app.prevPage()">
+          Vissza
+        </button>
+        <b>{{app.page + 1}} / {{app.pages}} oldal</b>
+        <button class="btn btn-primary"
+        data-ng-click="app.nextPage()">
+          Tovább
+        </button>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./public/js/app.js"></script>
+  </body>
+</html>
