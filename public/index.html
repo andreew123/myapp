@@ -77,7 +77,7 @@
             <td>
               <select class="form-input" data-ng-model="product.category">
                 <option data-ng-repeat="category in app.categories track by $index"
-                data-ng-selected="category.id == product.category">
+                data-ng-selected="{{ category.id === product.category }}" ng-value="category.id">
                   {{ category.name }}
                 </option>
               </select>
@@ -93,7 +93,7 @@
             <td>
               <select class="form-input" ng-model="product.condition_id">
                 <option data-ng-repeat="condition in app.conditions track by $index"
-                data-ng-selected="condition.id == product.condition_id">
+                data-ng-selected="{{ condition.id === product.condition_id }}">
                   {{ condition.name }}
                 </option>
               </select>
