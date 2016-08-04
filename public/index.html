@@ -91,7 +91,7 @@
               data-ng-model="product.price">
             </td>
             <td>
-              <select class="form-input" ng-model="app.editProduct.conditions">
+              <select class="form-input" ng-model="product.condition_id">
                 <option data-ng-repeat="condition in app.conditions track by $index"
                 data-ng-selected="condition.id == product.condition_id">
                   {{ condition.name }}
